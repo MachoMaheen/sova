@@ -2,25 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
-
-body {
-  font-family: "Nunito Sans", sans-serif;
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-.storage-legend-label {
+  background-color: #07102e;
+  color: white;
   font-family: "Nunito Sans", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 100%;
-  letter-spacing: 0.02em;
-  vertical-align: middle;
 }
 
-/* Subscription-specific styling */
 .bg-gradient-premium {
   background: linear-gradient(135deg, #093dce 0%, #07102e 100%);
 }
@@ -43,17 +36,4 @@ body {
 
 .bg-gradient-free {
   background: linear-gradient(135deg, #0e477a 0%, #07102e 90%);
-}
-
-/* Button gradients */
-.btn-gradient-green {
-  background: linear-gradient(to right, #00d36c, #00964d);
-}
-
-.btn-gradient-blue {
-  background: linear-gradient(to right, #2859fe, #093dce);
-}
-
-.btn-gradient-red {
-  background: linear-gradient(to right, #f65457, #d22024);
 }

@@ -1,7 +1,5 @@
-import * as React from "react";
-import { useState } from "react";
-
-type SubscriptionType = "FREE" | "LITE" | "PRO" | "PREMIUM";
+import React, { useState } from "react";
+import { SubscriptionType } from "./HomeScreen";
 
 interface SideNavProps {
   active?: string;
@@ -9,6 +7,9 @@ interface SideNavProps {
   subscription?: SubscriptionType;
 }
 
+/**
+ * SideNav Component that adapts based on subscription type
+ */
 const SideNav: React.FC<SideNavProps> = ({
   active = "Home",
   onNavClick,
@@ -21,32 +22,43 @@ const SideNav: React.FC<SideNavProps> = ({
     if (onNavClick) onNavClick(label);
   };
 
-  // Get the appropriate icon path based on subscription and whether the icon is active
-  const getIconPath = (label: string) => {
-    const isActive = selected === label;
-    const subscriptionPath = subscription.toLowerCase();
-    return `/assets/navbar-${subscriptionPath}/icon-${label.toLowerCase()}-${subscriptionPath}${
-      isActive ? "-active" : ""
-    }.svg`;
+  // Define navigation items with their icon paths based on subscription
+  const getIconPath = (name: string, isActive: boolean) => {
+    const subLower = subscription.toLowerCase();
+    const activeStr = isActive ? "-active" : "";
+    return `/assets/navbar-${subLower}/icon-${name.toLowerCase()}${activeStr}.svg`;
   };
 
   // Define navigation items
   const navItems = [
-    { label: "Home", icon: getIconPath("home") },
-    { label: "Schedule", icon: getIconPath("schedule") },
-    { label: "Devices", icon: getIconPath("devices") },
-    { label: "Account", icon: getIconPath("account") },
-    { label: "Settings", icon: getIconPath("settings") },
+    { 
+      label: "Home", 
+      isAvailable: true // available for all subscription types
+    },
+    { 
+      label: "Schedule", 
+      isAvailable: subscription === "PRO" || subscription === "PREMIUM" 
+    },
+    { 
+      label: "Devices", 
+      isAvailable: subscription !== "FREE"
+    },
+    { 
+      label: "Account", 
+      isAvailable: true // available for all subscription types
+    },
+    { 
+      label: "Settings", 
+      isAvailable: true // available for all subscription types
+    },
   ];
 
   return (
-    <nav className="fixed left-0 top-0 h-full w-24 bg-black flex flex-col items-center py-8 z-50 shadow-lg">
+    <nav className="fixed left-0 top-0 h-full w-24 bg-[#030714] flex flex-col items-center py-8 z-50 shadow-lg">
       <div className="mb-12">
-        <img
-          src={`/assets/avatars/avatar-${subscription.toLowerCase()}.svg`}
-          alt="Avatar"
-          className="w-12 h-12 rounded-full border-2 border-[#CAD1E6]"
-        />
+        <div className="w-12 h-12 rounded-full border-2 border-[#CAD1E6] flex items-center justify-center overflow-hidden">
+          <span className="text-white font-bold text-lg">AS</span>
+        </div>
       </div>
       <ul className="flex flex-col gap-8 w-full items-center">
         {navItems.map((item) => (
@@ -54,24 +66,17 @@ const SideNav: React.FC<SideNavProps> = ({
             <button
               className={`flex flex-col items-center w-full py-2 focus:outline-none ${
                 selected === item.label ? "bg-[#101C43] rounded-xl" : ""
-              }`}
-              onClick={() => handleClick(item.label)}
+              } ${!item.isAvailable ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
+              onClick={() => item.isAvailable && handleClick(item.label)}
+              disabled={!item.isAvailable}
             >
-              <img
-                src={item.icon}
-                alt={item.label}
-                className="w-7 h-7 mb-1"
-                onError={(e) => {
-                  // Fallback to premium icon if the subscription-specific icon is not found
-                  const target = e.target as HTMLImageElement;
-                  target.src = `/assets/navbar-premium/icon-${item.label.toLowerCase()}-premium${
-                    selected === item.label ? "-active" : ""
-                  }.svg`;
-                }}
-              />
+              {/* Fallback to text if image fails to load */}
+              <div className="w-7 h-7 mb-1 flex items-center justify-center">
+                {item.label.charAt(0)}
+              </div>
               <span
                 className={`text-xs font-semibold ${
-                  selected === item.label ? "text-white" : "text-[#CAD1E6]/70"
+                  selected === item.label ? "text-white" : "text-[#CAD1E6]"
                 }`}
               >
                 {item.label}
@@ -85,3 +90,4 @@ const SideNav: React.FC<SideNavProps> = ({
 };
 
 export default SideNav;
+
