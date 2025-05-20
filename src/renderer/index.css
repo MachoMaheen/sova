@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/nunito-sans/400.css';
+@import '@fontsource/nunito-sans/700.css';
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.storage-legend-label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+} 

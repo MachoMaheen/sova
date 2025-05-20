@@ -1,0 +1,1 @@
+(()=>{"use strict";var r={157:r=>{r.exports=require("electron")}},e={};(function t(o){var s=e[o];if(void 0!==s)return s.exports;var i=e[o]={exports:{}};return r[o](i,i.exports,t),i.exports})(157).contextBridge.exposeInMainWorld("api",{test:()=>"Hello from preload!"})})();
