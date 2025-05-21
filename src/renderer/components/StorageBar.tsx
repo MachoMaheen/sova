@@ -25,6 +25,7 @@ const StorageBar: React.FC<StorageBarProps> = ({
     (sum, segment) => sum + segment.percentage,
     0
   );
+
   if (totalPercentage > 100) {
     console.warn("StorageBar: Total percentage exceeds 100%");
   }
@@ -42,6 +43,7 @@ const StorageBar: React.FC<StorageBarProps> = ({
             .slice(0, idx)
             .reduce((acc, s) => acc + s.percentage, 0);
 
+          // Determine border radius for first and last segments
           const borderRadius =
             idx === 0
               ? "10px 0 0 10px"
@@ -75,7 +77,7 @@ const StorageBar: React.FC<StorageBarProps> = ({
               className="inline-block rounded-full"
               style={{ width: 10, height: 10, background: segment.color }}
             />
-            <span className="text-white/80 text-base storage-legend-label">
+            <span className="text-white/80 text-base font-nunito">
               {segment.label}
             </span>
           </div>

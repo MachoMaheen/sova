@@ -1,0 +1,145 @@
+/* Import Nunito Sans font */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030714;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #101c43;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2859fe;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Transitions */
+.transition {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effects */
+.hover\:bg-\[\#101C43\]\/50:hover {
+  background-color: rgba(16, 28, 67, 0.5);
+}
+
+/* Focus styles */
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+/* Custom utilities */
+.text-white\/60 {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button hover effects */
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 256px;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left-color: #2859fe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Storage bar segments */
+.storage-segment {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Device and scheduled delete items */
+.device-item,
+.scheduled-item {
+  transition: transform 0.2s ease-in-out;
+}
+
+.device-item:hover,
+.scheduled-item:hover {
+  transform: translateX(4px);
+}
+
+/* Notification badge */
+.notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff3b30;
+  border-radius: 50%;
+}
+
+/* Avatar border animation */
+.avatar-circle {
+  position: relative;
+}
+
+.avatar-circle::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid #cad1e6;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
